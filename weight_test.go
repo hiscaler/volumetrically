@@ -9,16 +9,16 @@ import (
 func TestWeight_Gram(t *testing.T) {
 	w := Weight{value: decimal.NewFromFloat(123.456)}
 	expected := 123.46
-	if gram := w.Gram(2); gram != expected {
-		t.Errorf("期望值是 %.2f g，但得到的是 %.2f g", expected, gram)
+	if gram := w.Gram(2); !almostEqual(gram, expected) {
+		t.Errorf("期望为 %.2f g, 但得到 %.2f g", expected, gram)
 	}
 }
 
 func TestWeight_Kilogram(t *testing.T) {
 	w := Weight{value: decimal.NewFromFloat(123456)}
 	expected := 123.46
-	if kg := w.Kilogram(2); kg != expected {
-		t.Errorf("期望值是 %.2f kg，但得到的是 %.2f kg", expected, kg)
+	if kg := w.Kilogram(2); !almostEqual(kg, expected) {
+		t.Errorf("期望为 %.2f kg, 但得到 %.2f kg", expected, kg)
 	}
 }
 
@@ -27,8 +27,8 @@ func TestWeight_Pound(t *testing.T) {
 	w := Weight{value: decimal.NewFromInt(1000)}
 	// 内部转换是除以 453.59237
 	// 1000 / 453.59237 = 2.20462262...
-	expected := 2.20
-	if lb := w.Pound(2); lb != expected {
-		t.Errorf("期望值是 %.2f lbs，但得到的是 %.2f lbs", expected, lb)
+	expected := 2.2046
+	if lb := w.Pound(4); !almostEqual(lb, expected) {
+		t.Errorf("期望为 %.4f lbs, 但得到 %.4f lbs", expected, lb)
 	}
 }
