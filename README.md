@@ -52,8 +52,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/hiscaler/volumetrically"
 	"log"
+
+	"github.com/hiscaler/volumetrically"
 )
 
 func main() {
@@ -61,7 +62,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("设置尺寸失败: %v", err)
 	}
-	
+
 	// 使用转换系数 5000 和厘米单位计算重量
 	// 体积重量（千克）= (长 x 宽 x 高 (cm)) / 5000
 	weight, err := v.Weight(5000, volumetrically.Centimeter)
@@ -89,8 +90,10 @@ func main() {
 ### `(v *Volumetrically) SetSize(length, width, height float64, unit string) (*Volumetrically, error)`
 
 设置 `Volumetrically` 实例的尺寸。
+
 - `length`, `width`, `height`: 浮点数格式的长、宽、高。
-- `unit`: 尺寸单位，可以是 `volumetrically.Centimeter` (`"cm"`), `volumetrically.Meter` (`"m"`) 或 `volumetrically.Inch` (`"inch"`)。
+- `unit`: 尺寸单位，可以是 `volumetrically.Centimeter` (`"cm"`), `volumetrically.Meter` (`"m"`) 或
+  `volumetrically.Inch` (`"inch"`)。
 
 ### `(v *Volumetrically) Volume() Volume`
 
@@ -99,26 +102,33 @@ func main() {
 ### `(v *Volumetrically) Weight(factor int32, unit string) (Weight, error)`
 
 计算体积重量。
-- `factor`: 体积重量系数 (例如: 5000, 6000)。
-- `unit`: 用于计算的体积单位，可以是 `volumetrically.Centimeter` (`"cm"`), `volumetrically.Meter` (`"m"`) 或 `volumetrically.Inch` (`"inch"`)。
 
-**注意**：`Weight` 方法的当前逻辑是将指定单位的体积值除以系数，并将结果直接作为 `Weight` 对象的内部值。`Weight` 对象的 `Gram()` 方法会直接返回此内部值。这意味着，只有当 `unit` 为 `"cm"` 并且 `factor` 的含义是 `cm³/g` 时，`Gram()` 的结果在物理意义上才是准确的。在标准的 `cm³/kg` 系数下，您需要自行进行单位换算。
+- `factor`: 体积重量系数 (例如: 5000, 6000)。
+- `unit`: 用于计算的体积单位，可以是 `volumetrically.Centimeter` (`"cm"`), `volumetrically.Meter` (`"m"`) 或
+  `volumetrically.Inch` (`"inch"`)。
+
+**注意**：`Weight` 方法的当前逻辑是将指定单位的体积值除以系数，并将结果直接作为 `Weight` 对象的内部值。`Weight` 对象的
+`Gram()` 方法会直接返回此内部值。这意味着，只有当 `unit` 为 `"cm"` 并且 `factor` 的含义是 `cm³/g` 时，`Gram()`
+的结果在物理意义上才是准确的。在标准的 `cm³/kg` 系数下，您需要自行进行单位换算。
 
 ---
 
 ### `(v Volume) CubicCentimeter(precision int32) float64`
 
 返回以**立方厘米**为单位的体积。
+
 - `precision`: 小数点精度。如果为负数，则不进行截断。
 
 ### `(v Volume) CubicMeter(precision int32) float64`
 
 返回以**立方米**为单位的体积。
+
 - `precision`: 小数点精度。如果为负数，则不进行截断。
 
 ### `(v Volume) CubicInch(precision int32) float64`
 
 返回以**立方英寸**为单位的体积。
+
 - `precision`: 小数点精度。如果为负数，则不进行截断。
 
 ---
@@ -126,15 +136,18 @@ func main() {
 ### `(w Weight) Gram(precision int32) float64`
 
 返回以**克**为单位的重量。
+
 - `precision`: 小数点精度。如果为负数，则不进行四舍五入。
 
 ### `(w Weight) Kilogram(precision int32) float64`
 
 返回以**千克**为单位的重量。
+
 - `precision`: 小数点精度。如果为负数，则不进行四舍五入。
 
 ### `(w Weight) Pound(precision int32) float64`
 
 返回以**磅**为单位的重量。
+
 - `precision`: 小数点精度。如果为负数，则不进行四舍五入。
 
