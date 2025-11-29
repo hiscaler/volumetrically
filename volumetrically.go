@@ -7,7 +7,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-// Volumetrically 用于计算体积和体积重量。
+// Volumetrically 用于计算体积和体积重量
 type Volumetrically struct {
 	length, width, height decimal.Decimal // 长、宽、高（默认单位：厘米）
 	volume                *Volume         // 缓存计算出的体积，避免重复计算
@@ -18,7 +18,7 @@ func New() *Volumetrically {
 	return &Volumetrically{}
 }
 
-// SetSize 设置尺寸。
+// SetSize 设置尺寸
 // length: 长度
 // width: 宽度
 // height: 高度
@@ -50,7 +50,7 @@ func (v *Volumetrically) SetSize(length, width, height float64, unit string) (*V
 	return v, nil
 }
 
-// Volume 计算体积。
+// Volume 计算体积
 // 如果已经计算过体积，将返回缓存的值。
 func (v *Volumetrically) Volume() Volume {
 	if v.volume != nil {
@@ -64,7 +64,7 @@ func (v *Volumetrically) Volume() Volume {
 	return *v.volume
 }
 
-// Weight 计算体积重量。
+// Weight 计算体积重量
 // factor: 体积重量系数，例如 5000 或 6000
 // unit: 用于计算体积重量的体积单位 (cm, m, inch)
 func (v *Volumetrically) Weight(factor int32, unit string) (Weight, error) {
